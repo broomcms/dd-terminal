@@ -5,55 +5,27 @@ const WEB_STATUS_INVALID_PARAM = 2;
 var connID;
 var invokeStatus = WEB_STATUS_SUCCESS;
 
-waas = tetra.waas('ingenico.coreapp.T3CoreService').on('invoke', function (data) {
-	//extract the received data
-	dataObj = JSON.parse(data.data);
-	var invokeRequest = dataObj.invoke_request;
-	var obj = JSON.parse(invokeRequest);
-	console.log(obj);
-	var amount = parseInt(obj["core"].tran_amt);
-	console.log(amount);
+var waas = tetra.waas('ingenico.coreapp.T3CoreService')
+.on('invoke', function (data) {
+//extract the received data
+dataObj = JSON.parse(data.data);
+var invokeRequest = dataObj.invoke_request;
+var obj = JSON.parse(invokeRequest);
 
-	//Perform the desired processing
-	console.log("I'm before Transaction");
+var amount = parseInt(obj["core"].tran_amt);
+console.log(amount);
 
-	//Return response + status of the invocation to Core Application
-	dataObj = JSON.parse(data.data);
-	connID = dataObj["$wp_connId"];
-	var response = {
-		"web":{
-			"tran_amt": amount
-		}
-	};
-	var invokeResponse = JSON.stringify(response);
-	this.sendResponse({invoke_response: invokeResponse, invoke_status: invokeStatus}, {connectionId: connID});
-}).start();
+//Perform the desired processing
+console.log("I'm before Transaction");
 
-var serviceRegister = tetra.service({
-	service: 'local.service.T3CoreService',
-	namespace: 'ingenico.coreapp'
-});
-
-var reg_request = {
-	"applicable_transactions":["0"],
-	"web":{
-	"id":"ABCD2345",
-	"srv_type":"2",
-	"display_name":"Loyalty App",
-	"dol":["tran_status","auth_amt"]
-	},
-	"core": {
-	"dol":["tran_amt"]
-	}
-};
-
-var request = JSON.stringify(reg_request);
-var Data = {
-	'registration_request': request
+//Return response + status of the invocation to Core Application
+dataObj = JSON.parse(data.data);
+connID = dataObj["$wp_connId"];
+var response = {
+"web":{
+"tran_amt": amount
 }
-// then connects to the service
-serviceRegister.connect()
-.call('RegisterApp',{
-	data: Data
-});
-
+};
+var invokeResponse = JSON.stringify(response);
+this.sendResponse({invoke_response: invokeResponse, invoke_status: invokeStatus}, {connectionId: connID});
+}).start();
