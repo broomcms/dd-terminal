@@ -2,7 +2,7 @@
 var register_cfg = {
     "web":{
         "id":"0480570D", //Web App ID
-        "display_name":"DD", //display name
+        "display_name":"Sample App", //display name
     },
     "reg_1":{
         "applicable_transactions":["0","3"], //sale & return
@@ -23,14 +23,15 @@ var register_cfg = {
         "core": {
             "dol":["tran_amt"] //Web service input parameters
         }
-    },
+    }
+	,
     "reg_3":{
         "applicable_transactions":["0","3"], //sale & return
         "web":{
             "srv_type":"1", // Before transaction
             "dol":["tran_amt"] // Web service output parameters
         },
-        "core": {
+       "core": {
             "dol":["tran_amt"] //Web service input parameters
         }
     }
@@ -56,6 +57,11 @@ register_service.connect().call('RegisterApp',{data:Data}).then(function (respon
         case 1:
             //alert("Application registered");
 			console.log("Application registered");
+			if(document.getElementById("back_btn_id")) {
+				document.getElementById("back_btn_id").addEventListener("click", tetra.weblet.trigger);
+			} else {
+				console.log("Error: back_btn_id is null")
+			}
         break;
             default:
             //alert("An error occured");
