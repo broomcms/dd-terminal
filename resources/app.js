@@ -15,7 +15,10 @@ var waas = tetra.waas('ingenico.coreapp.T3CoreService')
 	var amount = parseInt(obj["core"].tran_amt);
 	console.log(amount);
 	document.getElementById("step1").style.display ="block"; 
-	//$("#step1").show(); //not work
+	tetra.weblet.show();
+	tetra.weblet.on("close", function() {
+		tetra.weblet.hide();
+	});
 
 	//Perform the desired processing
 	console.log("I'm before Transaction");

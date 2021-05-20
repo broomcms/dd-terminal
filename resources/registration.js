@@ -2,7 +2,7 @@
 var register_cfg = {
     "web":{
         "id":"0480570D", //Web App ID
-        "display_name":"Sample App", //display name
+        "display_name":"DD", //display name
     },
     "reg_1":{
         "applicable_transactions":["0","3"], //sale & return
