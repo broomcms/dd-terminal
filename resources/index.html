@@ -3,17 +3,51 @@
 <html>
 <head>
   <title>Discount App Test2</title>  
-  
-  <script src="tetra.js"></script>
-  <script src="app.js"></script>
-  <script src="registration.js"></script>
+  <script src="js/tetra.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/registration.js"></script>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="step1" style="display:none">
-        Hello World1
-        <br>
-        <input id="back_btn_id" name="back_btn" type="button" value="Back"/>
-    </div>
-  
+<div id="interface1" rel="1" style="display:none" class="terminal step1">
+  <div class="head">DD Amount</div>
+  <br><br>
+  <div class="form-group">
+    <div class="txt">Enter Discount Dollar amount or %</div>
+    <input id="dol" name="damount" placeholder="$ Amount" class="form-control" required="true" value="" type="text"><br>
+    <input id="pou" name="pamount" placeholder="% Amount" class="form-control" required="true" value="" type="text">
+  </div>
+</div>
+<div id="interface2" rel="2" style="display:none" class="terminal step2">
+  <div class="head">Merchant Summary</div>
+  <br><br>
+  <div class="txt">
+    Starting Amount : <span class="startingamount"></span><br>
+    Discount in $ : <span class="dolamount"></span><br>
+    Discount in % : <span class="pouamount"></span><br>
+    New transaction amount : <span class="newtransaction"></span>
+  </div>
+</div>
+<div id="interface3" rel="3" style="display:none" class="terminal step3">
+  <br><br>
+  Please enter your temporary PIN code
+  <div class="head">Pay with DD</div>
+  <div class="col-md-8 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="pin" name="amount" class="form-control" required="true" pattern="\d*" maxlength="4" type="text">
+      </div>
+      <div class="error" style="display:none;"></div>
+  </div>
+</div>
+<div id="interface4" rel="4" style="display:none" class="terminal step4">
+  <div class="head">Transaction payment</div>
+  <br><br>
+  Hi <span class="name"></span>!<br>
+  Your current DD balance is <span class="dd"></span><br><br>
+  <span class="make_paiement">PAY NOW</span><br>
+  <div class="error2"></div>
+</div>
 </body>
 </html> 
