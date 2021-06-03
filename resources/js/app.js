@@ -30,8 +30,19 @@ var waas = tetra.waas('ingenico.coreapp.T3CoreService')
     });
 
     tetra.weblet.on("close", function() {
+        console.info(' app close...')
         tetra.weblet.hide();
         $(".step1").hide();
+    });
+
+    tetra.weblet.on("hide", function() {
+        console.info(' app close...')
+        tetra.weblet.hide();
+        $(".step1").hide();
+    });
+        
+    tetra.weblet.on('show', function () {
+        console.info(' app show...')
     });
 
     //Return response + status of the invocation to Core Application
@@ -89,7 +100,7 @@ $( document ).ready(function() {
         if (current==2){ // Merchant click event from Merchant confirms transaction
             if (e=="next"){ // Go to transaction
                 $(".step2").hide();
-                tetra.weblet.hide();
+                tetra.weblet.trigger( "close" );
             }
             if (e=="previous"){ // Go to step 1
                 $(".step1").show();
