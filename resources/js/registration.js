@@ -7,8 +7,8 @@ var register_cfg = {
     "reg_1":{
         "applicable_transactions":["0","3"], //sale & return
         "web":{
-        "srv_type":"3", // After transaction
-        "dol":[] // Web service output parameters
+            "srv_type":"3", // After transaction
+            "dol":[] // Web service output parameters
         },
         "core": {
             "dol":[] //Web service input parameters
@@ -23,8 +23,7 @@ var register_cfg = {
         "core": {
             "dol":["tran_amt"] //Web service input parameters
         }
-    }
-	,
+    },
     "reg_3":{
         "applicable_transactions":["0","3"], //sale & return
         "web":{
@@ -43,11 +42,20 @@ var register_service = tetra.service({
 });
 
 var reg_request = JSON.stringify(register_cfg);
+
 var Data = {
     'registration_request': reg_request
 }
 
-register_service.connect().call('RegisterApp',{data:Data}).then(function (response) {
+register_service
+    .connect()
+    .call('RegisterApp',
+    {
+        data:Data
+    }
+)
+
+.then(function (response) {
     var res = parseInt(response.registration_status);
     switch (res) {
         case 0:
@@ -56,12 +64,7 @@ register_service.connect().call('RegisterApp',{data:Data}).then(function (respon
             break;
         case 1:
             //alert("Application registered");
-			console.log("Application registered");
-			if(document.getElementById("back_btn_id")) {
-				document.getElementById("back_btn_id").addEventListener("click", tetra.weblet.trigger);
-			} else {
-				console.log("Error: back_btn_id is null")
-			}
+			console.log("Application is registered");
         break;
             default:
             //alert("An error occured");
